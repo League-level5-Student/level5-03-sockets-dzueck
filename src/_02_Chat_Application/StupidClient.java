@@ -1,9 +1,11 @@
-package _01_Intro_To_Sockets.client;
+package _02_Chat_Application;
+
 
 import java.net.*;
+import java.util.Scanner;
 import java.io.*;
 
-public class ClientGreeter {
+public class StupidClient {
 
    public static void main(String [] args) {
 	  //1. Create a String for the ip address of the server. 
@@ -15,6 +17,7 @@ public class ClientGreeter {
       //3. Surround steps 4-9 in a try-catch block that catches any IOExceptions.
     try {
     	 //4. Create an object of the Socket class. When initializing the object, pass in the ip address and the port number
+    	
     	Socket socket = new Socket(ip, portNumber);
          //5. Create a DataOutputStream object. When initializing it, use the Socket object you created in step 4 to call the getOutputStream() method.
     	DataOutputStream dataOut = new DataOutputStream(socket.getOutputStream());
@@ -25,7 +28,12 @@ public class ClientGreeter {
          //8. Use the DataInputStream object to print a message from the server using the readUTF() method.
          System.out.println(dataIn.readUTF());
          //9. Close the client's server object
-         socket.close();
+         Scanner scanner = new Scanner(System.in);
+         while(true) {
+        	 System.out.println("what do you say?");
+        	 dataOut.writeUTF(scanner.nextLine());
+        	 System.out.println("Responce: " + dataIn.readUTF());
+         }
     }
     catch(IOException e) {
     	e.printStackTrace();
