@@ -71,7 +71,7 @@ public class ChatApp extends Thread {
 		
 			Thread t = new Thread(() -> {
 				try {
-					new ServerGreeter().run();
+					new StupidClient().run();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
